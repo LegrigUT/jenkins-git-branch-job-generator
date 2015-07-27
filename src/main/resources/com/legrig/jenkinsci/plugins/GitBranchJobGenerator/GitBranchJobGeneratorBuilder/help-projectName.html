@@ -1,0 +1,18 @@
+<div>
+  Set template for job name generation.
+  Available variables:<ul>
+  		<li>TYPE	- Build type from Rule</li> 
+		<li>TYPE_CAP - Build type capitalized</li>
+		<li>BRANCH_FULL - Full Branch Name (including remote repo name]")</li>
+		<li>BRANCH_PROPER - Branch Name (excluding remote repo name]")</li>
+		<li>BRANCH - Massaged Branch Name (removing certain leading prefixes, like release/")</li>
+		<li>BRANCH_CLEAN - Clean version of ${BRANCH} - no special chatacters except for - and _</li>
+		<li>BRANCH_PROPER_CLEAN - Clean version of ${BRANCH_PROPER}</li>
+		<li>DAY- Current Day of Month as a number</li> 
+		<li>MONTH- Current Month as a number</li>
+		<li>YEAR<- Current Year as a number/li>
+		<li>DATE- Current Date as MONTH/DAY/YEAR</li>
+		<li>TIME - Current Time as HOUR:MINUTE:SECONDS </li>		
+  </ul>
+  
+</div>

@@ -1,0 +1,109 @@
+
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define"
+	xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+	<!-- This jelly script is used for per-project configuration. See global.jelly 
+		for a general discussion about jelly script. -->
+<!-- 
+	<f:entry title="GIT URL" field="gitURL">
+		<f:textbox default="" />
+		URL of the repository we are monitoring. If left blank, will use the
+		one specified in SCM
+	</f:entry>
+ -->
+ <f:entry title="Verbose Mode" field="verbose">
+	<f:checkbox />
+	If checked and additonal output is produced during run.
+ </f:entry>
+	<f:entry title="Branch Rules"
+		help="/plugin/GitBranchJobGenerator/help-branchRules.html">
+		Branch Rules are applied in order. The first matching rule is applied.
+
+		<f:repeatable name="branchRules" field="branchRules"
+			minimum="1" noAddButton="false" add="Add Another Branch Rule" header="Branch Rule">
+			<table width="100%">
+				<f:entry title="Match Patterns">
+					<f:repeatable name="matchPattern" field="matchPatterns"
+						minimum="1" noAddButton="false" header="" add="Add Another Pattern">
+						<table width="100%">
+							<f:entry title="Match Pattern" field="pattern">
+								<f:textbox default=".*" />
+								RegEx expression to match
+							</f:entry>
+							<f:entry>
+								<div align="right">
+									<input type="button" value="Delete Pattern" class="repeatable-delete"
+										style="margin-left: 1em;" />
+								</div>
+							</f:entry>
+						</table>
+					</f:repeatable>
+				</f:entry>
+
+				<f:block>
+					<table>
+						<f:optionalBlock
+							title="Perform Action (if unchecked, branches matching patterns above will be ignored)"
+							field="create" inline="true">
+							<f:entry title="Branch Type" field="branchType">
+								<f:textbox default="debug" />
+								Branch Type. Typically "debug" or "release"
+							</f:entry>
+
+							<f:entry title="Project to Use As Template" field="templateProject">
+								<f:editableComboBox items="${descriptor.templateProjects}" />
+								Select a project to use as template. Project selection may be
+								limited by settings in global jenkins configuration.
+							</f:entry>
+							<f:entry title="Project Name" field="projectName">
+								<f:textbox />
+								Pattern to generate Project Name.
+							</f:entry>
+							<f:entry title="Project Display Name" field="projectDisplayName">
+								<f:textbox />
+								Pattern to generate Project Display Name.
+							</f:entry>
+							<f:entry title="Project Description" field="projectDescription">
+								<f:expandableTextbox />
+								Pattern to generate Project Description.
+							</f:entry>
+							<f:entry title="Inject Env Variables" field="injectEnvVariables">
+								<f:checkbox />
+								If checked, environment variables describing this build will be added to the build environment
+							</f:entry>
+
+							<f:entry title="Enable On Create" field="enableOnCreate">
+								<f:checkbox />
+								If checked, any time a job is created under this rule, it is
+								enabled.
+							</f:entry>
+
+							<f:entry title="Execute On Create" field="runOnCreate">
+								<f:checkbox />
+								If checked and Enable on Create is checked, newly created job
+								are automatically triggered.
+							</f:entry>
+<!-- 
+							<f:entry title="Disable On Delete" field="disableOnDelete">
+								<f:checkbox />
+								If checked, any time a previously created branch is deleted, it
+								is
+								deactivated.
+							</f:entry>
+-->
+						</f:optionalBlock>
+					</table>
+				</f:block>
+
+				<f:entry>
+					<div align="right">
+						<input type="button" value="Delete Rule" class="repeatable-delete"
+							style="margin-left: 1em;" />
+					</div>
+				</f:entry>
+				<hr />
+			</table>
+		</f:repeatable>
+	</f:entry>
+
+</j:jelly>
+

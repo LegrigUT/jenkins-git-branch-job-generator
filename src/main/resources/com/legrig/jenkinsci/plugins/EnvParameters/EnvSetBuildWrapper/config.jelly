@@ -1,0 +1,46 @@
+
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define"
+	xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+	<!-- This jelly script is used for per-project configuration. See global.jelly 
+		for a general discussion about jelly script. -->
+<!-- 
+	<f:entry title="GIT URL" field="gitURL">
+		<f:textbox default="" />
+		URL of the repository we are monitoring. If left blank, will use the
+		one specified in SCM
+	</f:entry>
+ -->
+ 	<f:entry title="Fixed Environment Variables"
+		help="/plugin/GitBranchJobGenerator/help-EnvVars-FixedEnvVars.html">
+		<f:repeatable name="parameters"  field="parameters"
+			minimum="0" noAddButton="false" add="Add Fixed Parameter" header="Fixed Parameter">
+			<table width="100%">
+				<f:entry title="Fixed Env Parameter" field="parameterName">
+					<f:textbox/>
+				</f:entry>
+				<f:entry title="Parameter Value" field="parameterValue">
+					<f:textbox/>
+				</f:entry>
+				<f:advanced>
+					<f:entry title="Do Not Expand" field="literal">
+						<f:checkbox/>
+						When checked, no parameter expansion is done. Note, it is likely parameters will be expanded down the line anyway.
+					</f:entry>
+					<f:entry title="Do Not Overwrite Existing" field="noOverwrite">
+						<f:checkbox/>
+						When checked, if there is an existing value, it will be not be overwritten.
+					</f:entry>
+				</f:advanced>
+				<f:entry>
+					<div align="right">
+						<input type="button" value="Remove This Parameter" class="repeatable-delete"
+							style="margin-left: 1em;" />
+					</div>
+				</f:entry>
+				<hr />
+			</table>
+		</f:repeatable>
+	</f:entry>
+
+</j:jelly>
+
